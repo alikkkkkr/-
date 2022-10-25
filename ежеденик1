@@ -1,0 +1,98 @@
+﻿using System;
+using System.Security.Cryptography;
+
+namespace ежедневник
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            var date = new DateTime(2022, 10, 22);
+            Console.WriteLine(date.ToString());
+
+            ConsoleKeyInfo key = Console.ReadKey();
+            while (true)
+            {
+                while (key.Key != ConsoleKey.Enter)
+                {
+                    int i = 0;
+                    for (; key.Key == ConsoleKey.RightArrow; i++)
+                    {
+                        DateTime @new = date.Date.AddDays(i);
+                        Console.Clear();
+                        Console.WriteLine(@new);
+                        key = Console.ReadKey();
+                    }
+
+                    for (; key.Key == ConsoleKey.LeftArrow; i--)
+                    {
+                        DateTime @new = date.Date.AddDays(i);
+                        Console.Clear();
+                        Console.WriteLine(@new);
+                        key = Console.ReadKey();
+                    }
+
+                }
+                
+                Strelochki();
+
+            }
+            
+
+           
+        }
+
+
+        static void Strelochki()
+        {
+            int position = 1;
+            Menu();
+            while (true)
+            {
+
+                ConsoleKeyInfo key = Console.ReadKey();
+                if (key.Key == ConsoleKey.UpArrow)
+                {
+                    position--;
+                }
+                else if (key.Key == ConsoleKey.DownArrow)
+                {
+                    position++;
+                }
+
+                //else if (position > 5 || position < 1)
+                //{
+                //    position = 1;
+                //}
+                    
+                Console.Clear();
+                Menu();
+                Console.SetCursorPosition(0, position);
+                Console.WriteLine("->");
+            }
+        }
+
+        static void Menu()
+        {
+            
+            Console.WriteLine("      ваши планы на день: ");
+            Console.WriteLine("   1. встать");
+            Console.WriteLine("   2. пожрать");
+            Console.WriteLine("   3. поспать на паре");
+            Console.WriteLine("   4. пойти домой");
+            Console.WriteLine("   5. спать");
+            ConsoleKeyInfo key = Console.ReadKey();
+            if (key.Key == ConsoleKey.Enter) Opisanie();
+        }
+
+        static void Opisanie()
+        {
+            Ejednevnik ejednevnik = new Ejednevnik();
+            if (ejednevnik.position == 1)
+            {
+                Console.WriteLine("------------------");
+            }
+        }
+    }
+    
+}
